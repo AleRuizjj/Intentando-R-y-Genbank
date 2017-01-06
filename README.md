@@ -28,12 +28,12 @@ setwd("C:/Users/Lenovo/Desktop")
 
 Bufo_melanostictus_CXCR4 <- ("Bufo melanostictus[Organism] AND CXCR4[gene]" )
 
-##Lo busco en GenBank ##
+## Lo busco en GenBank ##
 
 Bufo <-  entrez_search(db="nuccore", 
                        term=Bufo_melanostictus_CXCR4, 
                        retmax=40)
-#Llamo los Ids (NCBI)
+## Llamo los Ids (NCBI)
 
 Bufo$ids  #Aparecen solo los que tienen voucher¿?
 
