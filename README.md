@@ -67,4 +67,4 @@ write(Bufo_melanostictus_12s_seq,
 
 
 
-.... Pienso como hacer un for
+###.... Pienso como hacer un for
