@@ -1,10 +1,10 @@
 ## Universidad Industrial de Santander 
-## Manejo de base de datos
-## R con sangre y genes
+## Manejo de base de datos, (R con sangre y genes
 ## Alejandra Ruiz J.
 
 
-## Llamo a la matriz de datos de Daza
+
+### Llamo a la matriz de datos de Daza
 
 datos<- read.csv("daza2016.csv", sep=";")
 
@@ -21,7 +21,7 @@ for(i in 1:length(datos$taxa))
       datos$taxa<-(download.file(paste("https://www.ncbi.nlm.nih.gov/nuccore/?term=",taxa$taxa[1], sep="")),"C:/Users/Lenovo/Google Drive/Alejandra/Daza_2016"
 ))
 wininet)
-## For fallido..###
+### For fallido..###
 
 #######busco en internet wiii######
 
@@ -29,7 +29,7 @@ install.packages("rentrez" )
 setwd("C:/Users/Lenovo/Desktop")
 
 
-## Solo para Bufo ##
+### Solo para Bufo ##
 
 ##Escribo la taxa con el gen.
 
