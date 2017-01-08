@@ -3,13 +3,14 @@
 
 datos<- read.csv("daza2016.csv", sep=";")
 
-colnames(datos)<-c("taxa","12S","16S","COI","CYTB","CXCR4","NCX1","POMC","RAG1","SLLC8A3","TYR")
+colnames(datos)<-c("taxa","12S","16S","COI","CYTB","CXCR4","NCX1","POMC","RAG1","SLC8A3","TYR")
 
-head(datos,0L)
+head(datos,1L)
  
 ############### Un For salvaje aparece ##############
 
 taxa<-read.csv("taxa.csv", sep=";")
+head(taxa,2L)
 
 for(i in 1:length(datos$taxa))
       datos$taxa<-(download.file(paste("https://www.ncbi.nlm.nih.gov/nuccore/?term=",taxa$taxa[1], sep="")),"C:/Users/Lenovo/Google Drive/Alejandra/Daza_2016"
@@ -174,7 +175,7 @@ write(Bufo_melanostictus_SLC8A3_seq,
 
 ## TYR
 
-Bufo_melanostictus_TYR <- ("Bufo melanostictus[Organism] AND tyrosine" )
+Bufo_melanostictus_TYR <- ("Bufo melanostictus[Organism] AND tyr[gene]" )
 Bufo_TYR <-  entrez_search(db="nuccore", 
                               term=Bufo_melanostictus_TYR, 
                               retmax=200)
@@ -196,7 +197,31 @@ Pboulengeri$ids
 Pboulengeri_COI_seq <- entrez_fetch(db="nuccore", 
                                            id=Pboulengeri$ids, 
                                            rettype="fasta")
-...Pienso como hacer un for
+
 ## Otro for salvaje aparece ##
 
-datos$taxa
+taxa <- as.character(datos$taxa) 
+org <- "[Organism] AND"
+genes <- c("12S","16S","COI[gene]", "cytochrome b", "CXCR4[gene]", "NCX1[gene]", "POMC[gene]", "RAG1[gene]", "SLC8A3[gene]","tyrosine")
+           
+sporg <- paste(taxa, org)
+sporg[1]
+
+
+for(i in 1:length(sporg[1:2]))
+  {
+    for(j in 1:length(genes[1:2]))
+    {
+        y <- paste(sporg[i], genes[j])
+        losids <- entrez_search(db="nuccore", 
+                      term=y, 
+                      retmax=1000)
+        cosito <- entrez_fetch(db="nuccore", 
+                     id= losids$ids, 
+                     rettype="fasta")
+        write(cosito, 
+              paste(y,".fasta"), 
+              sep="\n")
+
+      }
+  }
