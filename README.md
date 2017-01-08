@@ -1,22 +1,20 @@
-## Intentando-R-y-Genbank ##
-Descargando secuencias de Genbank a través de R 
 
-## Llamo a la matriz de datos ##
+#Llamo a la matriz de datos de Daza
 
-datos <- read.csv("daza2016.csv", sep=";")
+datos<- read.csv("daza2016.csv", sep=";")
 
 colnames(datos)<-c("taxa","12S","16S","COI","CYTB","CXCR4","NCX1","POMC","RAG1","SLLC8A3","TYR")
-head(datos,0L)
 
-##Un For salvaje aparece ##
+head(datos,0L)
+ 
+############### Un For salvaje aparece ##############
 
 taxa<-read.csv("taxa.csv", sep=";")
 
 for(i in 1:length(datos$taxa))
       datos$taxa<-(download.file(paste("https://www.ncbi.nlm.nih.gov/nuccore/?term=",taxa$taxa[1], sep="")),"C:/Users/Lenovo/Google Drive/Alejandra/Daza_2016"
 ))
-wininet) 
-
+wininet)
 ##For fallido..###
 
 #######busco en internet wiii######
@@ -24,31 +22,35 @@ wininet)
 install.packages("rentrez" )
 setwd("C:/Users/Lenovo/Desktop")
 
-## Escribo la taxa con el gen ##
+
+
+## Solo para Bufo ##
+
+##Escribo la taxa con el gen.
 
 Bufo_melanostictus_CXCR4 <- ("Bufo melanostictus[Organism] AND CXCR4[gene]" )
 
-## Lo busco en GenBank ##
+##Lo busco en GenBank
 
 Bufo <-  entrez_search(db="nuccore", 
                        term=Bufo_melanostictus_CXCR4, 
                        retmax=40)
-## Llamo los Ids (NCBI)
+#Llamo los Ids (NCBI)
 
 Bufo$ids  #Aparecen solo los que tienen voucher¿?
 
-## En formato Fasta ##
+#### En formato Fasta
 
 Bufo_melanostictus_CXCR4_seq <- entrez_fetch(db="nuccore", 
                                             id=Bufo$ids, 
                                             rettype="fasta")
-## Descargo lo que obtuve ##
+###Descargo lo que obtuve.
 
 write(Bufo_melanostictus_CXCR4_seq, 
       "Bufo_melanostictus_CXCR4.fasta", 
       sep="\n")
 
-##Ahora la misma sp pero con 12s ## 
+##Ahora la misma sp pero con 12s 
 
 Bufo_melanostictus_12s <- ("Bufo melanostictus[Organism] AND 12S[ARN]" )
 
@@ -60,11 +62,141 @@ Bufo_12s$ids
 Bufo_melanostictus_12s_seq <- entrez_fetch(db="nuccore", 
                                              id=Bufo_12s$ids, 
                                              rettype="fasta")
-## Descargo en Fasta ##
+##Descargo en Fasta
 write(Bufo_melanostictus_12s_seq, 
       "Bufo_melanostictus_12s.fasta", 
       sep="\n")
 
+##Ahora con 16S
 
+Bufo_melanostictus_16s <- ("Bufo melanostictus[Organism] AND 16S" )
+Bufo_16s <-  entrez_search(db="nuccore", 
+                           term=Bufo_melanostictus_16s, 
+                           retmax=100)
+Bufo_16s$ids
 
-###.... Pienso como hacer un for
+Bufo_melanostictus_16s_seq <- entrez_fetch(db="nuccore", 
+                                           id=Bufo_16s$ids, 
+                                           rettype="fasta")
+write(Bufo_melanostictus_16s_seq, 
+      "Bufo_melanostictus_16s.fasta", 
+      sep="\n")
+
+##Otro gen, COI
+
+Bufo_melanostictus_COI <- ("Bufo melanostictus[Organism] AND COI[gene]" )
+Bufo_COI <-  entrez_search(db="nuccore", 
+                           term=Bufo_melanostictus_COI, 
+                           retmax=100)
+Bufo_COI$ids
+
+Bufo_melanostictus_COI_seq <- entrez_fetch(db="nuccore", 
+                                           id=Bufo_COI$ids, 
+                                           rettype="fasta")
+write(Bufo_melanostictus_COI_seq, 
+      "Bufo_melanostictus_COI.fasta", 
+      sep="\n")
+
+##CYTB, cytochrome b
+
+Bufo_melanostictus_CYTB <- ("Bufo melanostictus[Organism] AND cytochrome b" )
+Bufo_CYTB <-  entrez_search(db="nuccore", 
+                           term=Bufo_melanostictus_CYTB, 
+                           retmax=100)
+Bufo_CYTB$ids
+
+Bufo_melanostictus_CYTB_seq <- entrez_fetch(db="nuccore", 
+                                           id=Bufo_CYTB$ids, 
+                                           rettype="fasta")
+write(Bufo_melanostictus_CYTB_seq, 
+      "Bufo_melanostictus_CYTB.fasta", 
+      sep="\n")
+
+## NCX1
+
+Bufo_melanostictus_NCX1 <- ("Bufo melanostictus[Organism] AND NCX1[gene]" )
+Bufo_NCX1 <-  entrez_search(db="nuccore", 
+                            term=Bufo_melanostictus_NCX1, 
+                            retmax=100)
+Bufo_NCX1$ids
+
+Bufo_melanostictus_NCX1_seq <- entrez_fetch(db="nuccore", 
+                                            id=Bufo_NCX1$ids, 
+                                            rettype="fasta")
+write(Bufo_melanostictus_NCX1_seq, 
+      "Bufo_melanostictus_NCX1.fasta", 
+      sep="\n")
+
+## POMC
+
+Bufo_melanostictus_POMC <- ("Bufo melanostictus[Organism] AND POMC[gene]" )
+Bufo_POMC <-  entrez_search(db="nuccore", 
+                            term=Bufo_melanostictus_POMC, 
+                            retmax=200)
+Bufo_POMC$ids
+
+Bufo_melanostictus_POMC_seq <- entrez_fetch(db="nuccore", 
+                                            id=Bufo_POMC$ids, 
+                                            rettype="fasta")
+write(Bufo_melanostictus_POMC_seq, 
+      "Bufo_melanostictus_POMC.fasta", 
+      sep="\n")
+
+## RAG1
+
+Bufo_melanostictus_RAG1 <- ("Bufo melanostictus[Organism] AND RAG1[gene]" )
+Bufo_RAG1 <-  entrez_search(db="nuccore", 
+                            term=Bufo_melanostictus_RAG1, 
+                            retmax=200)
+Bufo_RAG1$ids
+
+Bufo_melanostictus_RAG1_seq <- entrez_fetch(db="nuccore", 
+                                            id=Bufo_RAG1$ids, 
+                                            rettype="fasta")
+write(Bufo_melanostictus_RAG1_seq, 
+      "Bufo_melanostictus_RAG1.fasta", 
+      sep="\n")
+
+## SLC8A3
+
+Bufo_melanostictus_SLC8A3 <- ("Bufo melanostictus[Organism] AND SLC8A3[gene]" )
+Bufo_SLC8A3 <-  entrez_search(db="nuccore", 
+                            term=Bufo_melanostictus_SLC8A3, 
+                            retmax=200)
+Bufo_SLC8A3$ids
+
+Bufo_melanostictus_SLC8A3_seq <- entrez_fetch(db="nuccore", 
+                                            id=Bufo_SLC8A3$ids, 
+                                            rettype="fasta")
+write(Bufo_melanostictus_SLC8A3_seq, 
+      "Bufo_melanostictus_SLC8A3.fasta", 
+      sep="\n")
+
+## TYR
+
+Bufo_melanostictus_TYR <- ("Bufo melanostictus[Organism] AND tyrosine" )
+Bufo_TYR <-  entrez_search(db="nuccore", 
+                              term=Bufo_melanostictus_TYR, 
+                              retmax=200)
+Bufo_TYR$ids
+Bufo_melanostictus_TYR_seq <- entrez_fetch(db="nuccore", 
+                                              id=Bufo_TYR$ids, 
+                                              rettype="fasta")
+write(Bufo_melanostictus_TYR_seq, 
+      "Bufo_melanostictus_TYR.fasta", 
+      sep="\n")
+
+Pristimantis_boulengeri_MHUAA8952 <- ("Pristimantis boulengeri[Organism] AND COI[gene]")
+
+Pboulengeri <- entrez_search(db="nuccore", 
+              term=Pristimantis_boulengeri_MHUAA8952, 
+              retmax=1000)
+
+Pboulengeri$ids
+Pboulengeri_COI_seq <- entrez_fetch(db="nuccore", 
+                                           id=Pboulengeri$ids, 
+                                           rettype="fasta")
+...Pienso como hacer un for
+## Otro for salvaje aparece ##
+
+datos$taxa
