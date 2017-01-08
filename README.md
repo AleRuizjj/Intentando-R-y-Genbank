@@ -1,5 +1,5 @@
 
-#Llamo a la matriz de datos de Daza
+# Llamo a la matriz de datos de Daza
 
 datos<- read.csv("daza2016.csv", sep=";")
 
@@ -16,13 +16,12 @@ for(i in 1:length(datos$taxa))
       datos$taxa<-(download.file(paste("https://www.ncbi.nlm.nih.gov/nuccore/?term=",taxa$taxa[1], sep="")),"C:/Users/Lenovo/Google Drive/Alejandra/Daza_2016"
 ))
 wininet)
-##For fallido..###
+## For fallido..###
 
 #######busco en internet wiii######
 
 install.packages("rentrez" )
 setwd("C:/Users/Lenovo/Desktop")
-
 
 
 ## Solo para Bufo ##
@@ -45,13 +44,13 @@ Bufo$ids  #Aparecen solo los que tienen voucher¿?
 Bufo_melanostictus_CXCR4_seq <- entrez_fetch(db="nuccore", 
                                             id=Bufo$ids, 
                                             rettype="fasta")
-###Descargo lo que obtuve.
+### Descargo lo que obtuve.
 
 write(Bufo_melanostictus_CXCR4_seq, 
       "Bufo_melanostictus_CXCR4.fasta", 
       sep="\n")
 
-##Ahora la misma sp pero con 12s 
+## Ahora la misma sp pero con 12s 
 
 Bufo_melanostictus_12s <- ("Bufo melanostictus[Organism] AND 12S[ARN]" )
 
@@ -63,12 +62,12 @@ Bufo_12s$ids
 Bufo_melanostictus_12s_seq <- entrez_fetch(db="nuccore", 
                                              id=Bufo_12s$ids, 
                                              rettype="fasta")
-##Descargo en Fasta
+## Descargo en Fasta
 write(Bufo_melanostictus_12s_seq, 
       "Bufo_melanostictus_12s.fasta", 
       sep="\n")
 
-##Ahora con 16S
+## Ahora con 16S
 
 Bufo_melanostictus_16s <- ("Bufo melanostictus[Organism] AND 16S" )
 Bufo_16s <-  entrez_search(db="nuccore", 
@@ -83,7 +82,7 @@ write(Bufo_melanostictus_16s_seq,
       "Bufo_melanostictus_16s.fasta", 
       sep="\n")
 
-##Otro gen, COI
+## Otro gen, COI
 
 Bufo_melanostictus_COI <- ("Bufo melanostictus[Organism] AND COI[gene]" )
 Bufo_COI <-  entrez_search(db="nuccore", 
@@ -98,7 +97,7 @@ write(Bufo_melanostictus_COI_seq,
       "Bufo_melanostictus_COI.fasta", 
       sep="\n")
 
-##CYTB, cytochrome b
+## CYTB, cytochrome b
 
 Bufo_melanostictus_CYTB <- ("Bufo melanostictus[Organism] AND cytochrome b" )
 Bufo_CYTB <-  entrez_search(db="nuccore", 
@@ -225,3 +224,5 @@ for(i in 1:length(sporg[1:2]))
 
       }
   }
+
+## Soy feliz !!, For aceptado. ##
