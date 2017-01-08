@@ -1,5 +1,10 @@
+## Universidad Industrial de Santander 
+## Manejo de base de datos
+## R con sangre y genes
+## Alejandra Ruiz J.
 
-# Llamo a la matriz de datos de Daza
+
+## Llamo a la matriz de datos de Daza
 
 datos<- read.csv("daza2016.csv", sep=";")
 
@@ -201,7 +206,7 @@ Pboulengeri_COI_seq <- entrez_fetch(db="nuccore",
 
 taxa <- as.character(datos$taxa) 
 org <- "[Organism] AND"
-genes <- c("12S","16S","COI[gene]", "cytochrome b", "CXCR4[gene]", "NCX1[gene]", "POMC[gene]", "RAG1[gene]", "SLC8A3[gene]","tyrosine")
+genes <- c("12S","16S","COI[gene]", "cytochrome b", "CXCR4[gene]", "NCX1[gene]", "POMC[gene]", "RAG1[gene]", "SLC8A3[gene]", "tyrosine")
            
 sporg <- paste(taxa, org)
 sporg[1]
