@@ -230,4 +230,44 @@ for(i in 1:length(sporg[1:2]))
       }
   }
 
-## Soy feliz !!, For aceptado. ##
+## For aceptado. ## pero y los voucher ?
+## Ahora un for mas complejo, con if para que me imprima con voucher y no imprima los que no tienen nada
+
+
+for(i in 1:length(sporg))   # i es variable que corre por las filitas
+{
+  for(j in 1:length(genes))  # j tambien es variable
+  {
+    if(solosp[i,2]!="")       # solosp son las especies con el voucher y el numero separadas (3 colunmas)
+    { p <- paste(solosp$Taxon[i],"[Organims] AND", voucher, numero, genes[j]) #Paste es para concatenar 
+    losidsvouch <- entrez_search(db="nuccore",  # esto busca los ides de NCBI
+                            term=p, 
+                            retmax=1000)
+    cositovouch <- entrez_fetch(db="nuccore",    #Esta linea extrae las seq de los ids
+                           id= losidsvouch$ids, 
+                           rettype="fasta")
+    if (is.character(losidsvouch$ids))   #Como los ids se dan en caracter(cuando existen), pasa a imprimirlo, si no, (list()) no hace nada.
+    {
+    write(cositovouch,          #Escribe la seq en un txt*
+          paste(p,".fasta"), 
+          sep="\n")
+    } 
+    } else {
+      
+    y <- paste(sporg[i], genes[j])        #Cuando no tiene voucher especifico 
+    losids <- entrez_search(db="nuccore", 
+                            term=y, 
+                            retmax=1000)
+    cosito <- entrez_fetch(db="nuccore", 
+                           id= losids$ids, 
+                           rettype="fasta")
+    if(is.character(losids$ids))
+      {
+    write(cosito, 
+          paste(y,".fasta"), 
+          sep="\n")
+      }
+    }
+  }
+}
+
