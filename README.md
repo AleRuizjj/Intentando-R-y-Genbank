@@ -1,5 +1,5 @@
 ## Universidad Industrial de Santander 
-## Manejo de base de datos, (R con sangre y genes
+## Manejo de base de datos, (R con sangre y genes)
 ## Alejandra Ruiz J.
 
 
@@ -241,27 +241,27 @@ Paste es para concatenar
 if: como los ids se dan en caracter(cuando existen), pasa a imprimirlo, si no, (list()) no hace nada.
 
 
-for(i in 1:length(sporg))   
-{
-  for(j in 1:length(genes))  
+for(i in 1:length(sporg))
+  
+  for(j in 1:length(genes))
   {
-    if(solosp[i,2]!="")       
-    { p <- paste(solosp$Taxon[i],"[Organims] AND", voucher, numero, genes[j])  
-    losidsvouch <- entrez_search(db="nuccore",  
+    if(solosp[i,2]!="")
+      { p <- paste(solosp$Taxon[i],"[Organims] AND", voucher, numero, genes[j])
+    losidsvouch <- entrez_search(db="nuccore", 
                             term=p, 
                             retmax=1000)
-    cositovouch <- entrez_fetch(db="nuccore",    
+    cositovouch <- entrez_fetch(db="nuccore", 
                            id= losidsvouch$ids, 
                            rettype="fasta")
-    if (is.character(losidsvouch$ids))   
+    if (is.character(losidsvouch$ids))
     {
-    write(cositovouch,          
+    write(cositovouch, 
           paste(p,".fasta"), 
           sep="\n")
     } 
     } else {
       
-    y <- paste(sporg[i], genes[j])       
+    y <- paste(sporg[i], genes[j])
     losids <- entrez_search(db="nuccore", 
                             term=y, 
                             retmax=1000)
@@ -277,4 +277,3 @@ for(i in 1:length(sporg))
     }
   }
 }
-
