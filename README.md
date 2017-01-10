@@ -233,12 +233,12 @@ for(i in 1:length(sporg[1:2]))
 ## For aceptado. ## pero y los voucher ?
 ## Ahora un for mas complejo, con if para que me imprima con voucher y no imprima los que no tienen nada
 
-#i es variable que corre por las filitas
-#j tambien es variable
-#solosp son las especies con el voucher y su número separadas (3 colunmas)
-#esto busca los ids de NCBI
-#Paste es para concatenar
-#if: como los ids se dan en caracter(cuando existen), pasa a imprimirlo, si no, (list()) no hace nada.
+i es variable que corre por las filitas
+j tambien es variable
+solosp son las especies con el voucher y su número separadas (3 colunmas)
+esto busca los ids de NCBI
+Paste es para concatenar
+if: como los ids se dan en caracter(cuando existen), pasa a imprimirlo, si no, (list()) no hace nada.
 
 
 for(i in 1:length(sporg))   
